@@ -9,7 +9,7 @@ import os
 import secrets
 
 # Creación de la aplicación Flask
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Función para encriptar una imagen utilizando AES en modo CFB
 def encrypt_image(image_path, password):
@@ -26,25 +26,16 @@ def encrypt_image(image_path, password):
     ciphertext = encryptor.update(plaintext) + encryptor.finalize()
 
     # Guardar el texto cifrado en un nuevo archivo
-    encrypted_image_path = 'encrypted_image.png'
+    encrypted_image_path = 'encrypted_image.enc'
     with open(encrypted_image_path, 'wb') as file:
         file.write(ciphertext)
 
     return encrypted_image_path
 
-# Función para desencriptar una imagen utilizando AES en modo CFB
-def decrypt_image(encrypted_image_path, password):
-    with open(encrypted_image_path, 'rb') as file:
-        ciphertext = file.read()
-
     # Convertir la contraseña en una clave
     key = password.encode()
     # Crear un cifrador con el algoritmo AES y el modo CFB
     cipher = Cipher(algorithms.AES(key), modes.CFB(os.urandom(16)), backend=default_backend())
-    # Inicializar el cifrador para desencriptar
-    decryptor = cipher.decryptor()
-    # Desencriptar el texto cifrado
-    plaintext = decryptor.update(ciphertext) + decryptor.finalize()
 
     # Guardar el texto plano en un nuevo archivo
     decrypted_image_path = 'decrypted_image.png'
@@ -114,12 +105,6 @@ def decrypt_image_route():
     if not password_file or password_file.filename == '':
         return redirect(url_for('index'))
 
-    # Desencriptar la imagen y obtener la ruta del archivo desencriptado
-    decrypted_image_path = decrypt_image(encrypted_image_path, password_file)
-
-    # Enviar el archivo desencriptado como respuesta al usuario
-    return send_file(decrypted_image_path, as_attachment=True)
-
 # Ejecutar la aplicación si este script es el programa principal
-if _name_ == "_main_":
+if __name__ == "_main_":
     app.run(debug=True)
