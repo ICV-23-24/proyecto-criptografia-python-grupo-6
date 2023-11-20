@@ -26,36 +26,11 @@ def encrypt_image(image_path, password):
     ciphertext = encryptor.update(plaintext) + encryptor.finalize()
 
     # Guardar el texto cifrado en un nuevo archivo
-    encrypted_image_path = 'encrypted_image.png'
+    encrypted_image_path = 'encrypted_image.enc'
     with open(encrypted_image_path, 'wb') as file:
         file.write(ciphertext)
 
     return encrypted_image_path
-
-# Función para desencriptar una imagen utilizando AES en modo CFB
-def decrypt_image(encrypted_image_path, password_file_path):
-    with open(password_file_path, 'r') as password_file:
-        # Leer la contraseña desde el archivo de texto plano
-        password = password_file.read().strip()
-
-    with open(encrypted_image_path, 'rb') as file:
-        ciphertext = file.read()
-
-    # Convertir la contraseña en una clave
-    key = password.encode()
-    # Crear un cifrador con el algoritmo AES y el modo CFB
-    cipher = Cipher(algorithms.AES(key), modes.CFB(os.urandom(16)), backend=default_backend())
-    # Inicializar el cifrador para desencriptar
-    decryptor = cipher.decryptor()
-    # Desencriptar el texto cifrado
-    plaintext = decryptor.update(ciphertext) + decryptor.finalize()
-
-    # Guardar el texto plano en un nuevo archivo
-    decrypted_image_path = 'decrypted_image.png'
-    with open(decrypted_image_path, 'wb') as file:
-        file.write(plaintext)
-
-    return decrypted_image_path
 
 # Ruta principal, devuelve la plantilla 'index_symmetric.html'
 @app.route('/')
@@ -100,29 +75,6 @@ def encrypt_image_route():
 
     # Enviar el archivo encriptado como respuesta al usuario
     return send_file(encrypted_image_path, as_attachment=True)
-
-# Ruta para desencriptar una imagen
-@app.route('/decrypt_image', methods=['POST'])
-def decrypt_image_route():
-    # Obtener la imagen cifrada subida por el usuario
-    encrypted_image_file = request.files['encrypted_image']
-    if not encrypted_image_file or encrypted_image_file.filename == '':
-        return redirect(url_for('index'))
-
-    encrypted_image_path = 'encrypted_image.png'
-    encrypted_image_file.save(encrypted_image_path)
-
-    # Obtener la ruta del archivo con la contraseña
-    password_file_path = request.form['password_file_path']
-    if not password_file_path:
-        return redirect(url_for('index'))
-
-    # Desencriptar la imagen y obtener la ruta del archivo desencriptado
-    decrypted_image_path = decrypt_image(encrypted_image_path, password_file_path)
-
-    # Enviar el archivo desencriptado como respuesta al usuario
-    return send_file(decrypted_image_path, as_attachment=True)
-
 # Ejecutar la aplicación si este script es el programa principal
 if __name__ == "__main__":
     app.run(debug=True)

@@ -19,17 +19,6 @@
         <button type="submit">Encrypt Image</button>
     </form>
 
-    <h2>Decrypt Image</h2>
-    <form action="/decrypt_image" method="post" enctype="multipart/form-data">
-        <label for="encrypted_image">Select Encrypted Image:</label>
-        <input type="file" name="encrypted_image" accept="image/*" required><br>
-
-        <label for="password_file_path">Password File Path:</label>
-        <input type="text" name="password_file_path" required><br>
-
-        <button type="submit">Decrypt Image</button>
-    </form>
-
     <h2>Generate and Download Key</h2>
     <form action="/generar_clave" method="get">
         <button type="submit">Generate and Download Key</button>

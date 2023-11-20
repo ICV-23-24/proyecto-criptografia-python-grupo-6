@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Encryption/Decryption</title>
+</head>
+<body>
+    <h1>Image Encryption/Decryption</h1>
+
+    {% if encrypted %}
+        <h2>Encrypted Image:</h2>
+        <p>Image encrypted successfully. Save the encrypted data for decryption.</p>
+        <p>Encrypted Data: <a href="{{ encrypted_filename }}" download>Download Encrypted Data</a></p>
+        <br>
+        <form action="/decrypt" method="post">
+            <label for="password">Enter password to decrypt:</label>
+            <input type="password" name="password" required>
+            <input type="hidden" name="encrypted_filename" value="{{ encrypted_filename }}">
+            <br>
+            <button type="submit">Decrypt</button>
+        </form>
+    {% elif decrypted %}
+        <h2>Decrypted Image:</h2>
+        <img src="{{ decrypted_filename }}" alt="Decrypted Image">
+        <p>Image decrypted successfully. <a href="{{ url_for('index') }}">Go back</a></p>
+    {% else %}
+        <form action="/encrypt" method="post" enctype="multipart/form-data">
+            <label for="file">Choose an image to encrypt:</label>
+            <input type="file" name="file" accept=".png, .jpg, .jpeg" required>
+            <br>
+            <label for="password">Enter password:</label>
+            <input type="password" name="password" required>
+            <br>
+            <button type="submit">Encrypt</button>
+        </form>
+    {% endif %}
+</body>
+</html>
