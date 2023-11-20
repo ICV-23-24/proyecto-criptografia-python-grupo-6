@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symmetric Encryption</title>
+</head>
+<body>
+    <h1>Symmetric Encryption Example</h1>
+
+    <h2>Encrypt Image</h2>
+    <form action="/encrypt_image" method="post" enctype="multipart/form-data">
+        <label for="image">Select Image:</label>
+        <input type="file" name="image" accept="image/*" required><br>
+
+        <label for="password_file">Password File:</label>
+        <input type="file" name="password_file" required><br>
+
+        <button type="submit">Encrypt Image</button>
+    </form>
+
+    <h2>Decrypt Image</h2>
+    <form action="/decrypt_image" method="post" enctype="multipart/form-data">
+        <label for="encrypted_image">Select Encrypted Image:</label>
+        <input type="file" name="encrypted_image" accept="image/*" required><br>
+
+        <label for="password_file_path">Password File Path:</label>
+        <input type="text" name="password_file_path" required><br>
+
+        <button type="submit">Decrypt Image</button>
+    </form>
+
+    <h2>Generate and Download Key</h2>
+    <form action="/generar_clave" method="get">
+        <button type="submit">Generate and Download Key</button>
+    </form>
+</body>
+</html>
