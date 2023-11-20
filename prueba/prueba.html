@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseñas</title>
+</head>
+<body>
+    <h1>Generador de Contraseñas</h1>
+    
+    <p>Haz clic en el botón para generar una nueva contraseña:</p>
+    
+    <button id="generarContrasena">Generar Contraseña</button>
+    
+    <p id="contrasenaGenerada"></p>
+
+    <script>
+        // Función para hacer una solicitud al servidor y obtener una nueva contraseña
+        function obtenerNuevaContrasena() {
+            // Realizar una solicitud al servidor (puedes usar AJAX o Fetch)
+            // En este caso, simplemente abrimos el archivo generado por Python y leemos la respuesta
+            fetch('/ruta_al_servidor_que_genera_la_contrasena')
+                .then(response => response.text())
+                .then(contrasena => {
+                    document.getElementById('contrasenaGenerada').innerText = 'Contraseña generada: ' + contrasena;
+                })
+                .catch(error => console.error('Error al obtener la contraseña:', error));
+        }
+
+        // Asignar la función al evento de clic del botón
+        document.getElementById('generarContrasena').addEventListener('click', obtenerNuevaContrasena);
+    </script>
+</body>
+</html>
