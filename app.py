@@ -1,15 +1,28 @@
 from datetime import datetime
 from flask import Flask, render_template, request
 import functions as f
+from firebase import firebase
 
 app = Flask(__name__)
 
+firebase_config = {
+    "apiKey": "AIzaSyD3IkiTKoTPCXVhQkMEFnqDPOX27LgdcLg",
+    "authDomain": "grupo-6-b1e81.firebaseapp.com",
+    "databaseURL": "G-CKHV8LXBMB",
+    "projectId": "grupo-6-b1e81",
+    "storageBucket": "grupo-6-b1e81.appspot.com",
+    "messagingSenderId": "663980461078",
+    "appId": "1:663980461078:web:48667350aef455874e3937"
+}
+
+fb = firebase.FirebaseApplication("https://" + firebase_config["projectId"] + ".firebaseio.com/", None)
 
 # Replace the existing home function with the one below
 @app.route("/")
 def home():
     return render_template("home.html")
 
+# Encriptacion simetrica
 @app.route("/csimetrico/", methods=['GET','POST'])
 def csimetrico():
     if request.method == 'POST':
@@ -26,6 +39,8 @@ def csimetrico():
 
     return render_template("csimetrico.html")
 
+
+#Encriptacion Asimetrica
 @app.route("/casimetrico/")
 def casimetrico():
     return render_template("casimetrico.html")
@@ -53,3 +68,6 @@ def hello_there(name = None):
 @app.route("/api/data")
 def get_data():
     return app.send_static_file("data.json")
+
+if __name__ == '__main__':
+    app.run(debug=True)
