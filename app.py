@@ -5,6 +5,8 @@ from firebase import firebase
 
 app = Flask(__name__)
 
+Usuario = None
+
 firebase_config = {
     "apiKey": "AIzaSyD3IkiTKoTPCXVhQkMEFnqDPOX27LgdcLg",
     "authDomain": "grupo-6-b1e81.firebaseapp.com",
@@ -54,6 +56,13 @@ def about():
 def doc():
     return render_template("doc.html")
 
+@app.route("/sesion/")
+def sesion(): 
+    return render_template("sesion.html")
+
+@app.route("/registro/")
+def registro():
+    return render_template("registro.html")
 
 @app.route("/hello/")
 @app.route("/hello/<name>")

@@ -3,5 +3,6 @@
 Inicio
 {% endblock %}
 {% block content %}
-<p>La página de inicio contendrá un enlace a las diferentes funcionalidades de la app</p>
+<h2><a href="{{ url_for('sesion') }}" class="navbar-item">INICIAR SESION</a></h2><br><br>
+<h2><a href="{{ url_for('registro') }}" class="navbar-item">REGISTRARSE</a></h2>
 {% endblock %}
