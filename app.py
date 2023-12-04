@@ -5,7 +5,8 @@ from firebase import firebase
 
 app = Flask(__name__)
 
-Usuario = None
+Id_usu = None
+nombre_coleccion = "usuarios"
 
 firebase_config = {
     "apiKey": "AIzaSyD3IkiTKoTPCXVhQkMEFnqDPOX27LgdcLg",
@@ -60,9 +61,21 @@ def doc():
 def sesion(): 
     return render_template("sesion.html")
 
-@app.route("/registro/")
+@app.route("/registro/", methods=['GET','POST'])
 def registro():
+    if request.method == 'POST':
+        nombre = request.form['Nom']
+        apellidos = request.form['Ape']
+        usuario = request.form['NomUsu']
+        Email = request.form['Email']
+        Passwd = request.form['Passwd']
+
+        f.agregarDatos(nombre,apellidos,Email,Passwd,usuario)
+        return render_template("home.html")
+
     return render_template("registro.html")
+        
+        
 
 @app.route("/hello/")
 @app.route("/hello/<name>")
