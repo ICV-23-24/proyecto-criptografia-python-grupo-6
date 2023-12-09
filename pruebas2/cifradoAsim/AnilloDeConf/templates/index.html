@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asymmetric Encryption</title>
+</head>
+<body>
+    <h1>Asymmetric Encryption</h1>
+
+    <h2>Public Key:</h2>
+    <pre>{{ public_key.public_bytes(encoding=serialization.Encoding.PEM, format=serialization.PublicFormat.SubjectPublicKeyInfo).decode('utf-8') }}</pre>
+
+    <form action="/encrypt" method="post">
+        <h2>Encrypt:</h2>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Encrypt</button>
+    </form>
+
+    {% if encrypted_message %}
+    <h2>Encrypted Message:</h2>
+    <pre>{{ encrypted_message.hex() }}</pre>
+    {% endif %}
+
+</body>
+</html>
