@@ -5,7 +5,6 @@ from firebase import firebase
 
 app = Flask(__name__)
 
-Id_usu = None
 nombre_coleccion = "usuarios"
 
 firebase_config = {
@@ -24,6 +23,10 @@ fb = firebase.FirebaseApplication("https://" + firebase_config["projectId"] + ".
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/home2/")
+def home2():
+    return render_template("home2.html")
 
 # Encriptacion simetrica
 @app.route("/csimetrico/", methods=['GET','POST'])
@@ -57,8 +60,16 @@ def about():
 def doc():
     return render_template("doc.html")
 
-@app.route("/sesion/")
+@app.route("/sesion/", methods=['GET','POST'])
 def sesion(): 
+    if request.method == 'POST':
+        usuario = request.form['nomUsu']
+        Passwd = request.form['Passwd']
+
+        f.Id_usu = f.login(usuario,Passwd)
+        print (f"Bienvenido {f.Id_usu} :)")
+        return render_template("home2.html")
+    
     return render_template("sesion.html")
 
 @app.route("/registro/", methods=['GET','POST'])
