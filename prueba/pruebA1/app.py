@@ -11,6 +11,7 @@ import secrets
 # Creación de la aplicación Flask
 app = Flask(__name__)
 
+
 # Función para encriptar una imagen utilizando AES en modo CFB
 def encrypt_image(image_path, password):
     with open(image_path, 'rb') as file:
@@ -26,7 +27,7 @@ def encrypt_image(image_path, password):
     ciphertext = encryptor.update(plaintext) + encryptor.finalize()
 
     # Guardar el texto cifrado en un nuevo archivo
-    encrypted_image_path = 'encrypted_image.enc'
+    encrypted_image_path = 'encrypted_image.png'
     with open(encrypted_image_path, 'wb') as file:
         file.write(ciphertext)
 
@@ -87,23 +88,28 @@ def encrypt_image_route():
 
     # Enviar el archivo encriptado como respuesta al usuario
     return send_file(encrypted_image_path, as_attachment=True)
+#desencriptar
+@app.route('/Decrypt_image', methods=['POST'])
 
-# Ruta para desencriptar una imagen
-@app.route('/decrypt_image', methods=['POST'])
 def decrypt_image_route():
-    # Obtener la imagen cifrada subida por el usuario
-    encrypted_image_file = request.files['encrypted_image']
-    if not encrypted_image_file or encrypted_image_file.filename == '':
+    # Obtener la imagen subida por el usuario
+    image_file = request.files['image']
+    if not image_file or image_file.filename == '':
         return redirect(url_for('index'))
 
-    # Guardar la imagen cifrada en el servidor
-    encrypted_image_path = 'encrypted_image.png'
-    encrypted_image_file.save(encrypted_image_path)
+def desencriptar_imagen(clave, iv, imagen_cifrada):
+    backend = default_backend()
 
-    # Obtener la contraseña utilizada para encriptar la imagen
-    password_file = request.files['password_file']
-    if not password_file or password_file.filename == '':
-        return redirect(url_for('index'))
+    # Crear un objeto de contexto de cifrado
+    cipher = Cipher(algorithms.AES(clave), modes.CFB(iv), backend=backend)
+
+    # Crear un objeto de descifrado
+    decryptor = cipher.decryptor()
+
+    # Desencriptar la imagen
+    imagen_descifrada = decryptor.update(imagen_cifrada) + decryptor.finalize()
+
+    return imagen_descifrada
 
 # Ejecutar la aplicación si este script es el programa principal
 if __name__ == "_main_":

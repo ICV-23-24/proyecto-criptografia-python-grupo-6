@@ -19,6 +19,19 @@
     <button type="submit">Encrypt Image</button>
 </form>
 
+<!-- Decrypt Image Form -->
+<h1>Desencriptar Imagen</h1>
+
+<form action="/desencriptar" method="post" enctype="multipart/form-data">
+    <label for="image">Select Image:</label>
+    <label for="clave">Clave de desencriptación:</label>
+    <input type="file" name="image" required><br>
+    <label for="password_file">Select Password File:</label>
+    <input type="file" name="password_file" required><br>
+    <br>
+    <input type="submit" value="Desencriptar Imagen">
+</form>
+
 <!-- Generate and Download Key -->
 <form action="/generar_clave" method="get">
     <h2>Generate and Download Key</h2>

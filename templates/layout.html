@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
+        <link rel="stylesheet" type="text/css" href="css/diseño.css" />
     </head>
 
     <body>
@@ -14,7 +15,6 @@
                 <a href="{{ url_for('casimetrico') }}" class="navbar-item">C. Asimétrico</a>
                 <a href="{{ url_for('about') }}" class="navbar-item">Nuestro Equipo</a>
                 <a href="{{ url_for('doc') }}" class="navbar-item">Documentación</a>
-                <a href="{{ url_for('otro') }}" class="navbar-item">Otro</a>
             </nav>
         </header>
 
