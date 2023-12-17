@@ -4,4 +4,7 @@ Pagina Principal
 {% endblock %}
 {% block content %}
 BIENVENIDO
+<form action="{{ url_for('home2', id_usuario='tu_id_de_usuario') }}" method="get">
+    <button type="submit">Ejecutar Función</button>
+</form>
 {% endblock %}

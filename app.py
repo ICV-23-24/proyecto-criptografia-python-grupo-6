@@ -26,6 +26,7 @@ def home():
 
 @app.route("/home2/")
 def home2():
+    valor_cp = f.claves(f.Id_usu)
     return render_template("home2.html")
 
 # Encriptacion simetrica
@@ -81,7 +82,8 @@ def registro():
         Email = request.form['Email']
         Passwd = request.form['Passwd']
 
-        f.agregarDatos(nombre,apellidos,Email,Passwd,usuario)
+        f.agregarDatos(nombre,apellidos,Email,Passwd,usuario)        
+
         return render_template("home.html")
 
     return render_template("registro.html")
