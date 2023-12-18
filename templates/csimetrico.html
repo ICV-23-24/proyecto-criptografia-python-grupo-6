@@ -8,32 +8,33 @@ C. Simétrico
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación de Encriptación</title>
+    <title>Cifrado Simétrico</title>
 </head>
 <body>
     <h1>Aplicación de Encriptación</h1>
     <form id="formularioEncriptacion" action="/encrypt" method="post" enctype="multipart/form-data">
-        <label for="file">Elige un archivo:</label>
+        <label for="file">Elige un archivo:</label></br>
         <input type="file" name="file" required>
-        <label for="algorithm">Elige el algoritmo de encriptación:</label>
+        <label for="algorithm">Elige el algoritmo de encriptación:</label></br>
         <select name="algorithm" required>
             <option value="des">DES</option>
             <option value="rsa">RSA</option>
-        </select>
-        <button type="submit">Encriptar</button>
+        </select></br></br>
+        <button type="submit">Encriptar</button></br>
+    </br>
     </form>
     
     <form id="formularioDesencriptacion" action="/decrypt" method="post" enctype="multipart/form-data">
         <label for="ciphertext">Elige un archivo de texto cifrado:</label>
-        <input type="file" name="ciphertext" required>
+        <input type="file" name="ciphertext" required></br>
         <label for="key">Elige el archivo de clave:</label>
-        <input type="file" name="key" required>
-        <label for="algorithm">Elige el algoritmo de desencriptación:</label>
+        <input type="file" name="key" required></br>
+        <label for="algorithm">Elige el algoritmo de desencriptación:</label></br>
         <select name="algorithm" required>
             <option value="des">DES</option>
             <option value="rsa">RSA</option>
-        </select>
-        <button type="submit">Desencriptar</button>
+        </select></br></br>
+        <button type="submit">Desencriptar</button></br>
     </form>
 
     <!-- Script JavaScript para manejar la lógica de la aplicación -->
