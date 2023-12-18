@@ -99,18 +99,24 @@ def login(usuario,Passwd):
 def generate_des_key():
     return get_random_bytes(24)
 
-# Función para encriptar con una clave DES3
+# Función para encriptar con una clave DES3 en modo CBC
 def encrypt_with_des_key(key, plaintext):
-    cipher = DES3.new(key, DES3.MODE_ECB)
-    ciphertext = cipher.encrypt(plaintext.encode('utf-8'))
-    # Convierte el resultado a Base64 para su representación como cadena
-    return base64.b64encode(ciphertext).decode('utf-8')
+    iv = get_random_bytes(8)  # Vector de inicialización aleatorio
+    cipher = DES3.new(key, DES3.MODE_CBC, iv)
+    ciphertext = cipher.encrypt(pad(plaintext.encode('utf-8'), DES3.block_size))
+    # Combina el vector de inicialización con el texto cifrado y conviértelo a Base64
+    return base64.b64encode(iv + ciphertext).decode('utf-8')
 
-# Función para desencriptar con una clave DES3
+# Función para desencriptar con una clave DES3 en modo CBC
 def decrypt_with_des_key(key, ciphertext):
-    cipher = DES3.new(key, DES3.MODE_ECB)
-    decrypted_text = cipher.decrypt(base64.b64decode(ciphertext)).decode('utf-8')
+    # Decodifica el texto cifrado desde Base64
+    ciphertext = base64.b64decode(ciphertext)
+    # Extrae el vector de inicialización y el texto cifrado
+    iv, ciphertext = ciphertext[:8], ciphertext[8:]
+    cipher = DES3.new(key, DES3.MODE_CBC, iv)
+    decrypted_text = unpad(cipher.decrypt(ciphertext), DES3.block_size).decode('utf-8')
     return decrypted_text
+
 
 # Función para generar un par de claves RSA de 2048 bits
 def generate_rsa_key_pair():

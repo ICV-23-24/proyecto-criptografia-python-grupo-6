@@ -1,13 +1,13 @@
-#App.py
+# #App.py
 
-pip install Flask python-firebase PyCrypto
-pip install python-firebase
-pip install cryptography
-pip install pycryptodome
-pip install pycryptodomex
-pip install firebase-admin python-firebase
-pip install python-firebase
+# pip install Flask python-firebase PyCrypto
+# pip install python-firebase
+# pip install cryptography
+# pip install pycryptodome
+# pip install pycryptodomex
+# pip install firebase-admin python-firebase
+# pip install python-firebase
 
-#Functions.py
+# #Functions.py
 
-pip install pycryptodome firebase-admin
+# pip install pycryptodome firebase-admin
