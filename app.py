@@ -24,7 +24,6 @@ firebase_config = {
 
 fb = firebase.FirebaseApplication("https://" + firebase_config["projectId"] + ".firebaseio.com/", None)
 
-# Replace the existing home function with the one below
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -51,7 +50,7 @@ def csimetrico():
     return render_template("csimetrico.html")
 
 
-#Encriptacion Asimetrica
+#Encriptacion Asimetrica (No funciona)
 @app.route("/casimetrico/")
 def casimetrico():
     return render_template("casimetrico.html")
