@@ -133,4 +133,3 @@ def decrypt_with_rsa_private_key(private_key, ciphertext):
     cipher = PKCS1_OAEP.new(key)
     decrypted_text = cipher.decrypt(base64.b64decode(ciphertext)).decode('utf-8')
     return decrypted_text
-
