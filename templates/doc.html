@@ -15,9 +15,49 @@ Documentación
     pip install pycryptodomex<br>
     pip install firebase-admin python-firebase<br>
     pip install python-firebase<br>
+</h2>
     
+<p>Librerias</p>
+<h3>Flask:</h3>
+
+from flask import Flask, render_template, request, jsonify, send_from_directory
+
+<h3>Datetime:</h3>
+from datetime import datetime
+Funciones personalizadas (suponiendo que estén en el archivo functions.py):
+
+import functions as f
+
+<h3>Firebase:</h3>
+
+from firebase import firebase
+
+<h3>OS:</h3>
+import os
+Cryptodome (si no está instalado):
+
+Puedes instalarlo con pip install pycryptodome
+Otras librerías necesarias:
+
+Asegúrate de tener instaladas todas las librerías que has utilizado, como base64, jsonify, etc.
+<h2>
     <p>Functions.py</p>
-    
     pip install pycryptodome firebase-admin
+
+    <p>Librerias</p>
+<h3>Cryptodome:</h3>
+from Cryptodome.Cipher import AES
+from Cryptodome.Util.Padding import pad, unpad
+from base64 import b64encode, b64decode
+
+<h3>Firebase:</h3>
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+<h3>Crypto (PyCryptodome):</h3>
+from Crypto.Cipher import DES3, PKCS1_OAEP
+from Crypto.Random import get_random_bytes
+from Crypto.PublicKey import RSA
+import base64
     </h2>
 {% endblock %}
